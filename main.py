@@ -69,14 +69,15 @@ class Graphe(object):
         return len(self.sommets)
     
     def nbAretes(self):                 #calcul le nombre d'aretes presentes dans le graphe
-        L=[[]*self.nbSommets()]
+        L=[]
         k=0
         
         for s in self.sommets:
-            for v in g.getSommet(s).voisins:
-                if s.id not in L[v]: 
-                    L[s].append(v)
+            L.append(s)
+            for v in self.getSommet(s).voisins:
+                if v.id not in L:
                     k=k+1
+        
         return(k)
 
     def degreMax(self):                 #recupere le degre maximal du graphe
@@ -134,7 +135,7 @@ class Graphe(object):
     
     def analyseGraphe(self):            #lance l'analyse d'un graphe
         print ("nombre de sommets : " + str(self.nbSommets()))
-        print ("nombre d\'aretes : " + str(self.nbSommets()))
+        print ("nombre d\'aretes : " + str(self.nbAretes()))
         print ("degre maximal : " + str(self.degreMax()))
         print ("degre moyen : " + str(self.degreMoyen()))
         self.distribDegre()
@@ -214,5 +215,5 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
 # albert.stockGraphe("fichieralbert")
 # albert.stockGraphe2("fichieralbert2")
 
-leGraphe = filetoGraph("./Wikipedia2.csv")
+leGraphe = filetoGraph("./Wikipedia1.csv")
 leGraphe.analyseGraphe()    
