@@ -6,6 +6,7 @@
     Simon PEREIRA
 """
 import random
+import math
 import matplotlib.pyplot as plt 
 
 random.seed()
@@ -204,8 +205,37 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
                     i += 1
     return graphe
 
+def diametreGraphe(graphe):         #calcule le diametre du graphe
+    D=floyd_warshall(graphetoMat(graphe))
+    
+    max=0
+    for i in D:
+        for j in i:
+            if j != math.inf and j>max :
+                max=j
+    return(max)
+
+def floyd_warshall(mat):            #renvoie la matrice de la plus petite distance pour chaque couple de sommets
+    n = len(mat[0])
+    distance = list(map(lambda i: list(map(lambda j: j, i)), mat))
+    
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
+    return(distance)
+
+def graphetoMat(graphe):            #convertit le graphe en matrice
+    M = [[math.inf for i in range(graphe.nbSommets())]for j in range(graphe.nbSommets())]
+   
+    for s in graphe.sommets:
+        for v in graphe.getSommet(s).voisins:
+            M[s-1][v.id-1]=1
+    return(M)
+
 # edgar1 = genereRado(10)
 # edgar1.analyseGraphe()
+# print(diametreGraphe(edgar1))
 # edgar1.stockGraphe("edgar1")
 
 # edgar2 = genereRado(100)
@@ -245,5 +275,5 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
 # albert5.analyseGraphe()
 # albert5.stockGraphe("albert5")
 
-# leGraphe = filetoGraph("./RoadNetwork.txt")
-# leGraphe.analyseGraphe()
+leGraphe = filetoGraph("./Wikipedia2.csv")
+leGraphe.analyseGraphe()
