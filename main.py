@@ -1,3 +1,10 @@
+"""
+    Etude de graphs du Web
+    Julie GASPAR
+    Max HOFFER
+    Laureline PARTONNAUD
+    Simon PEREIRA
+"""
 import random
 
 random.seed()
@@ -5,61 +12,63 @@ random.seed()
 class Sommet(object):
     """docstring for Sommet"""
 
-    def __init__(self, id):
+    def __init__(self, id):             #initialisation du sommet avec son nom (id) et la liste de ses voisins
         super(Sommet, self).__init__()
         self.id = id
         self.voisins = []
 
-    def ajouterVoisin(self, voisin):
+    def ajouterVoisin(self, voisin):    #ajoute un voisin à la liste des voisins du sommet
         self.voisins.append(voisin)
         voisin.voisins.append(self)
 
-    def __str__(self):
+    def __str__(self):                  #toString qui affiche le sommet et la liste de ses voisins
         return str(self.id) + " est voisin de " + str([x.id for x in self.voisins])
 
-    def getVoisins(self):
+    def getVoisins(self):               #recupere la liste des voisins d'un sommet
         return self.voisins
 
-    def getId(self):
+    def getId(self):                    #recupere l'id d'un sommet
         return self.id
 
-    def getDegre(self):
+    def getDegre(self):                 #recupere le degre d'un sommet
         return len(self.voisins)
 
 
 class Graphe(object):
     """docstring for Graphe"""
 
-    def __init__(self):
+    def __init__(self):                 #initialisation du graph avec l'ensemble de ses sommets
         super(Graphe, self).__init__()
         self.sommets = {}
 
-    def ajouterSommet(self, id):
+    def ajouterSommet(self, id):        #ajoute un sommet au graph
         sommet = Sommet(id)
         self.sommets[id] = sommet
 
-    def getSommet(self, id):
+    def getSommet(self, id):            #recupere un sommet a l'id recherche s'il existe
         if id in self.sommets:
             return self.sommets[id]
         else:
             return None
-    def __contains__(self, id):
+
+    def __contains__(self, id):         #retourne vrai si un sommet appartient au graph
         return id in self.sommets
-    def ajouterArete(self, idDepart, idArrivee):
+
+    def ajouterArete(self, idDepart, idArrivee):    #
         if idDepart not in self.sommets:
             self.ajouterSommet(idDepart)
         if idArrivee not in self.sommets:
             self.ajouterSommet(idArrivee)
         self.sommets[idDepart].ajouterVoisin(self.sommets[idArrivee])
 
-    def degreTotal(self):
+    def degreTotal(self):               #calcule la somme des degres des sommets du graph
         total = 0
         for x in self.sommets:
             total += self.sommets[x].getDegre()
         return total
 
 
-def genereRado(taille):
+def genereRado(taille):                 #genene un graph de Edgar Gilbert
     graphe = Graphe()
     for x in range(1, taille+1, 1):
         graphe.ajouterSommet(x)
@@ -72,7 +81,7 @@ def genereRado(taille):
                     graphe.ajouterArete(x,y)
     return graphe
 
-def genereBarabasiAlbert(m, taille):
+def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
     graphe = Graphe()
     for x in range(1, 4, 1):
         graphe.ajouterSommet(x)
