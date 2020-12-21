@@ -116,13 +116,8 @@ class Graphe(object):
                     lesvoisins.append([i, j])
         for i in lesvoisins:
             print (i)
-
-    def stockGraphe(self, nomfichier):  #stocke le graphe dans un fichier texte sous forme de liste l'adjacence
-        with open("./"+nomfichier+".txt", "w") as monfichier:
-            for i in self.sommets:
-                monfichier.write(str(i) + ''.join(self.sommets[i].adjacent()) + "\n")
             
-    def stockGraphe2(self, nomfichier): #stocke le graphe dans un fichier texte (format différent)
+    def stockGraphe(self, nomfichier): #stocke le graphe dans un fichier texte depuis la liste d'adjacence
         with open("./"+nomfichier+".txt", "w") as monfichier:
             for i in self.sommets:
                 for j in self.sommets[i].adjacent():
@@ -209,11 +204,46 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
                     i += 1
     return graphe
 
+# edgar1 = genereRado(10)
+# edgar1.analyseGraphe()
+# edgar1.stockGraphe("edgar1")
 
-# albert = genereBarabasiAlbert(2, 10)
-# albert.analyseGraphe()
-# albert.stockGraphe("fichieralbert")
-# albert.stockGraphe2("fichieralbert2")
+# edgar2 = genereRado(100)
+# edgar2.analyseGraphe()
+# edgar2.stockGraphe("edgar2")
 
-leGraphe = filetoGraph("./Wikipedia1.csv")
-leGraphe.analyseGraphe()    
+# edgar3 = genereRado(1000)
+# edgar3.analyseGraphe()
+# edgar3.stockGraphe("edgar3")
+
+# edgar4 = genereRado(2000)
+# edgar4.analyseGraphe()
+# edgar4.stockGraphe("edgar4")
+
+# edgar5 = genereRado(5000)
+# edgar5.analyseGraphe()
+# edgar5.stockGraphe("edgar5")
+
+
+# albert1 = genereBarabasiAlbert(2, 10)
+# albert1.analyseGraphe()
+# albert1.stockGraphe("albert1")
+
+# albert2 = genereBarabasiAlbert(2, 100)
+# albert2.analyseGraphe()
+# albert2.stockGraphe("albert2")
+
+# albert3 = genereBarabasiAlbert(2, 1000)
+# albert3.analyseGraphe()
+# albert3.stockGraphe("albert3")
+
+# albert4 = genereBarabasiAlbert(2, 10000)
+# albert4.analyseGraphe()
+# albert4.stockGraphe("albert4")
+
+# albert5 = genereBarabasiAlbert(2, 15000)
+# albert5.analyseGraphe()
+# albert5.stockGraphe("albert5")
+
+# leGraphe = filetoGraph("./RoadNetwork.txt")
+# leGraphe.analyseGraphe()
