@@ -24,7 +24,7 @@ class Sommet(object):
     def __str__(self):                  #toString qui affiche le sommet et la liste de ses voisins
         return str(self.id) + " est voisin de " + str([x.id for x in self.voisins])
 
-    def adjacent(self):
+    def adjacent(self):                 #retourne les sommets adjactents
         return str([x.id for x in self.voisins])
 
     def getVoisins(self):               #recupere la liste des voisins d'un sommet
@@ -64,17 +64,48 @@ class Graphe(object):
             self.ajouterSommet(idArrivee)
         self.sommets[idDepart].ajouterVoisin(self.sommets[idArrivee])
 
+    def nbSommets(self):                #calcule le nombre de sommet du graphe
+        return len(self.sommets)
+    
+    def nbAretes(self):                 #calcul le nombre d'aretes presentes dans le graphe
+        return 0    #!!!!!!!!!!!!!!
+
+    def degreMax(self):                 #recupere le degre maximal du graphe
+        lesdegres = []        
+        for x in self.sommets:
+            lesdegres.append(self.sommets[x].getDegre())
+        return max(lesdegres)
+
     def degreTotal(self):               #calcule la somme des degres des sommets du graphe
         total = 0
         for x in self.sommets:
             total += self.sommets[x].getDegre()
         return total
 
-    def stockGraphe(self, nomfichier):  #stocke le graphe dans un fichier texte sous forme de liste l'adjecence
+    def degreMoyen(self):               #calcul le degré moyen du graphe
+        return self.degreTotal()/self.nbSommets()
+
+    def listeAdj(self):                 #affiche uns à uns les voisins des sommets du graphe
+        lesvoisins = []
+        for i in self.sommets:
+            for j in self.sommets[i].adjacent():
+                if j not in '[ ,]' :
+                    lesvoisins.append([i, j])
+        for i in lesvoisins:
+            print (i)
+
+    def stockGraphe(self, nomfichier):  #stocke le graphe dans un fichier texte sous forme de liste l'adjacence
         with open("./"+nomfichier+".txt", "w") as monfichier:
             for i in self.sommets:
                 monfichier.write(str(i) + ''.join(self.sommets[i].adjacent()) + "\n")
             
+    def stockGraphe2(self, nomfichier): #stocke le graphe dans un fichier texte (format différent)
+        with open("./"+nomfichier+".txt", "w") as monfichier:
+            for i in self.sommets:
+                for j in self.sommets[i].adjacent():
+                    if j not in '[ ,]' :
+                        monfichier.write(str(i) + "," + str(j) + "\n")
+    
 def genereRado(taille):                 #genene un graph de Edgar Gilbert
     graphe = Graphe()
     for x in range(1, taille+1, 1):
@@ -113,4 +144,11 @@ albert = genereBarabasiAlbert(2, 100)
 for x in albert.sommets:
     print(albert.getSommet(x))
 
+
 albert.stockGraphe("fichieralbert")
+albert.stockGraphe2("fichieralbert2")
+#albert.listeAdj()
+print ("nb sommets " + str(albert.nbSommets()))
+print ("degre max" + str(albert.degreMax()))
+print ("degre ttl " + str(albert.degreTotal()))
+print ("degre moyen " + str(albert.degreMoyen()))
