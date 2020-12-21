@@ -24,6 +24,9 @@ class Sommet(object):
     def __str__(self):                  #toString qui affiche le sommet et la liste de ses voisins
         return str(self.id) + " est voisin de " + str([x.id for x in self.voisins])
 
+    def adjacent(self):
+        return str([x.id for x in self.voisins])
+
     def getVoisins(self):               #recupere la liste des voisins d'un sommet
         return self.voisins
 
@@ -37,11 +40,11 @@ class Sommet(object):
 class Graphe(object):
     """docstring for Graphe"""
 
-    def __init__(self):                 #initialisation du graph avec l'ensemble de ses sommets
+    def __init__(self):                 #initialisation du graphe avec l'ensemble de ses sommets
         super(Graphe, self).__init__()
         self.sommets = {}
 
-    def ajouterSommet(self, id):        #ajoute un sommet au graph
+    def ajouterSommet(self, id):        #ajoute un sommet au graphe
         sommet = Sommet(id)
         self.sommets[id] = sommet
 
@@ -51,23 +54,27 @@ class Graphe(object):
         else:
             return None
 
-    def __contains__(self, id):         #retourne vrai si un sommet appartient au graph
+    def __contains__(self, id):         #retourne vrai si un sommet appartient au graphe
         return id in self.sommets
 
-    def ajouterArete(self, idDepart, idArrivee):    #
+    def ajouterArete(self, idDepart, idArrivee):    #ajoute une arete entre deux sommets
         if idDepart not in self.sommets:
             self.ajouterSommet(idDepart)
         if idArrivee not in self.sommets:
             self.ajouterSommet(idArrivee)
         self.sommets[idDepart].ajouterVoisin(self.sommets[idArrivee])
 
-    def degreTotal(self):               #calcule la somme des degres des sommets du graph
+    def degreTotal(self):               #calcule la somme des degres des sommets du graphe
         total = 0
         for x in self.sommets:
             total += self.sommets[x].getDegre()
         return total
 
-
+    def stockGraphe(self, nomfichier):  #stocke le graphe dans un fichier texte sous forme de liste l'adjecence
+        with open("./"+nomfichier+".txt", "w") as monfichier:
+            for i in self.sommets:
+                monfichier.write(str(i) + ''.join(self.sommets[i].adjacent()) + "\n")
+            
 def genereRado(taille):                 #genene un graph de Edgar Gilbert
     graphe = Graphe()
     for x in range(1, taille+1, 1):
@@ -105,3 +112,5 @@ albert = genereBarabasiAlbert(2, 100)
 
 for x in albert.sommets:
     print(albert.getSommet(x))
+
+albert.stockGraphe("fichieralbert")
