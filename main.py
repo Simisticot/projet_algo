@@ -6,6 +6,7 @@
     Simon PEREIRA
 """
 import random
+import matplotlib.pyplot as plt 
 
 random.seed()
 
@@ -68,7 +69,15 @@ class Graphe(object):
         return len(self.sommets)
     
     def nbAretes(self):                 #calcul le nombre d'aretes presentes dans le graphe
-        return 0    #!!!!!!!!!!!!!!
+        L=[[]*self.nbSommets()]
+        k=0
+        
+        for s in self.sommets:
+            for v in g.getSommet(s).voisins:
+                if s.id not in L[v]: 
+                    L[s].append(v)
+                    k=k+1
+        return(k)
 
     def degreMax(self):                 #recupere le degre maximal du graphe
         lesdegres = []        
@@ -84,6 +93,19 @@ class Graphe(object):
 
     def degreMoyen(self):               #calcul le degré moyen du graphe
         return self.degreTotal()/self.nbSommets()
+
+    def distribDegre(self):
+        x = [] 
+          
+        for lessommets in self.sommets:
+            x.append(self.sommets[lessommets].getDegre())
+
+        plt.hist(x, range = (0, self.degreMax() + 1), density = True, edgecolor = 'black')
+
+        plt.xlabel('x - Degre') 
+        plt.ylabel('y - Frequence d\'apparition') 
+        plt.title('Distribution des degrés') 
+        plt.show() 
 
     def listeAdj(self):                 #affiche uns à uns les voisins des sommets du graphe
         lesvoisins = []
@@ -105,8 +127,56 @@ class Graphe(object):
                 for j in self.sommets[i].adjacent():
                     if j not in '[ ,]' :
                         monfichier.write(str(i) + "," + str(j) + "\n")
+   
+    def afficheGraphe(self):            #affiche le graphe avec sa liste d'adjacence
+        for x in self.sommets:
+            print(self.getSommet(x))
     
-def genereRado(taille):                 #genene un graph de Edgar Gilbert
+    def analyseGraphe(self):            #lance l'analyse d'un graphe
+        print ("nombre de sommets : " + str(self.nbSommets()))
+        print ("nombre d\'aretes : " + str(self.nbSommets()))
+        print ("degre maximal : " + str(self.degreMax()))
+        print ("degre moyen : " + str(self.degreMoyen()))
+        self.distribDegre()
+
+
+def filetoGraph(path):            #transforme un fichier de listes des arêtes en graphe
+    file = open(path,"r")
+    lines = file.readlines()
+    file.close()
+    
+    graphe = Graphe()
+    
+    for l in lines:
+        i=0
+        id=""
+        c= l.strip()[i]
+        while c!="[" and c!= "]" and c!="," and c!=" " and c!="\t" :
+            id=id +c
+            i=i+1
+            c= l.strip()[i]
+        
+        id=int(id)
+        
+        if not(graphe.__contains__(id)):
+            graphe.ajouterSommet(id)
+        
+        v =""
+        for c in l.strip()[i:]:
+            if c!="[" and c!= "]" and c!="," and c!=" " and c!="\t" :
+                v=v+c
+        
+        if v!="" :
+            v=int(v)
+            if not(graphe.__contains__(v)):
+                graphe.ajouterSommet(v)
+            
+            if v not in [x.id for x in graphe.sommets[id].voisins]:
+                graphe.sommets[id].ajouterVoisin(graphe.sommets[v])
+
+    return graphe
+
+def genereRado(taille):                 #genene un graphe de Edgar Gilbert
     graphe = Graphe()
     for x in range(1, taille+1, 1):
         graphe.ajouterSommet(x)
@@ -139,16 +209,10 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
     return graphe
 
 
-albert = genereBarabasiAlbert(2, 100)
+# albert = genereBarabasiAlbert(2, 10)
+# albert.analyseGraphe()
+# albert.stockGraphe("fichieralbert")
+# albert.stockGraphe2("fichieralbert2")
 
-for x in albert.sommets:
-    print(albert.getSommet(x))
-
-
-albert.stockGraphe("fichieralbert")
-albert.stockGraphe2("fichieralbert2")
-#albert.listeAdj()
-print ("nb sommets " + str(albert.nbSommets()))
-print ("degre max" + str(albert.degreMax()))
-print ("degre ttl " + str(albert.degreTotal()))
-print ("degre moyen " + str(albert.degreMoyen()))
+leGraphe = filetoGraph("./Wikipedia2.csv")
+leGraphe.analyseGraphe()    
