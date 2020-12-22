@@ -104,7 +104,7 @@ class Graphe(object):
         plt.xlabel('x - Degre') 
         plt.ylabel('y - Frequence d\'apparition') 
         plt.title('Distribution des degrés') 
-        plt.show(block = False) 
+        plt.show() 
 
     def stockGraphe(self, path):        #stocke le graphe dans un fichier texte depuis la liste d'adjacence
         with open(path+".txt", "w") as monfichier:
