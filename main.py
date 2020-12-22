@@ -124,7 +124,7 @@ class Graphe(object):
         print ("nombre d\'aretes : " + str(self.nbAretes()))
         print ("degre maximal : " + str(self.degreMax()))
         print ("degre moyen : " + str(self.degreMoyen()))
-        # self.distribDegre()
+        self.distribDegre()
 
 
 def filetoGraph(path):                  #transforme un fichier de listes des arêtes en graphe
@@ -304,3 +304,46 @@ wiki1.analyseGraphe()
 wiki2 = filetoGraph("./Wikipedia2.csv")
 print("Analyse de Wikipedia2")
 wiki2.analyseGraphe()
+
+
+""" Lecture et analyse des graphes generes pour le rapport """
+
+# analyseedgar1 = filetoGraph("./algos_rapport/edgar1.txt")
+# print("Analyse de Edgar1")
+# analyseedgar1.analyseGraphe()
+
+# analyseedgar2 = filetoGraph("./algos_rapport/edgar2.txt")
+# print("Analyse de Edgar2")
+# analyseedgar2.analyseGraphe()
+
+# analyseedgar3 = filetoGraph("./algos_rapport/edgar3.txt")
+# print("Analyse de Edgar3")
+# analyseedgar3.analyseGraphe()
+
+# analyseedgar4 = filetoGraph("./algos_rapport/edgar4.txt")
+# print("Analyse de Edgar4")
+# analyseedgar4.analyseGraphe()
+
+# analyseedgar5 = filetoGraph("./algos_rapport/edgar5.txt")
+# print("Analyse de Edgar5")
+# analyseedgar5.analyseGraphe()
+
+# analysealbert1 = filetoGraph("./algos_rapport/albert1.txt")
+# print("Analyse de Albert1")
+# analysealbert1.analyseGraphe()
+
+# analysealbert2 = filetoGraph("./algos_rapport/albert2.txt")
+# print("Analyse de Albert2")
+# analysealbert2.analyseGraphe()
+
+# analysealbert3 = filetoGraph("./algos_rapport/albert3.txt")
+# print("Analyse de Albert3")
+# analysealbert3.analyseGraphe()
+
+# analysealbert4 = filetoGraph("./algos_rapport/albert4.txt")
+# print("Analyse de Albert4")
+# analysealbert4.analyseGraphe()
+
+# analysealbert5 = filetoGraph("./algos_rapport/albert5.txt")
+# print("Analyse de Albert5")
+# analysealbert5.analyseGraphe()
