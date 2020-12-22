@@ -1,6 +1,11 @@
 # Projet - Outils pour la conception d'algorithmes
 ## Etudes de graphes du web
 
+Ce projet utilise différentes librairies qu'il nécessite l'importer : 
+
+```import random
+import math
+import matplotlib.pyplot as plt ```
 
 Tous les fichiers générés, lus et analysés, utilisés pour le rapport se situent dans un sous dossier du rendu. 
 
