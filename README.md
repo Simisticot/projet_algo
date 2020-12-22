@@ -2,7 +2,7 @@
 ## Etudes de graphes du web
 
 
-Tous les fichiers générés, lus et analysés, utilisés pour le rapport se situent dans le même dossier que notre code source. 
+Tous les fichiers générés, lus et analysés, utilisés pour le rapport se situent dans un sous dossier du rendu. 
 
 Notre projet a été réalisé en Python. Lors de son exécution, il génère automatiquement 5 graphes de type Edgar Gilbert, 5 graphes de type Edgar Gilbert et 5 autres de type Barabasi-Albert. Ces 10 graphes sont de tailles différentes. Après cette génération, notre programme les analyse (calcule des nombre de sommets et d'arêtes, des degré maximal et moyen et affiche la distribution des degrés).
 

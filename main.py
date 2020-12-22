@@ -226,55 +226,55 @@ def graphetoMat(graphe):                #convertit le graphe en matrice
 """ Generation et analyse des graphes Edgar Gilbert """
 
 edgar1 = genereRado(10)
-printf("Analyse de Edgar1")
+print("Analyse de Edgar1")
 edgar1.analyseGraphe()
 print("diamètre : " + str(diametreGraphe(edgar1)))
 edgar1.stockGraphe("./edgar1")
 
 edgar2 = genereRado(100)
-printf("Analyse de Edgar2")
+print("Analyse de Edgar2")
 edgar2.analyseGraphe()
 edgar2.stockGraphe("./edgar2")
 
 # edgar3 = genereRado(1000)
-# printf("Analyse de Edgar3")
+# print("Analyse de Edgar3")
 # edgar3.analyseGraphe()
 # edgar3.stockGraphe("./edgar3")
 
 # edgar4 = genereRado(2000)
-# printf("Analyse de Edgar4")
+# print("Analyse de Edgar4")
 # edgar4.analyseGraphe()
 # edgar4.stockGraphe("./edgar4")
 
 # edgar5 = genereRado(5000)
-# printf("Analyse de Edgar5")
+# print("Analyse de Edgar5")
 # edgar5.analyseGraphe()
 # edgar5.stockGraphe("./edgar5")
 
 """ Generation et analyse des graphes Barabasi-Albert """
 
 albert1 = genereBarabasiAlbert(2, 10)
-printf("Analyse de Albert1")
+print("Analyse de Albert1")
 albert1.analyseGraphe()
 albert1.stockGraphe("./albert1")
 
 albert2 = genereBarabasiAlbert(2, 100)
-printf("Analyse de Albert2")
+print("Analyse de Albert2")
 albert2.analyseGraphe()
 albert2.stockGraphe("./albert2")
 
 albert3 = genereBarabasiAlbert(2, 1000)
-printf("Analyse de Albert3")
+print("Analyse de Albert3")
 albert3.analyseGraphe()
 albert3.stockGraphe("./albert3")
 
 # albert4 = genereBarabasiAlbert(2, 10000)
-# printf("Analyse de Albert4")
+# print("Analyse de Albert4")
 # albert4.analyseGraphe()
 # albert4.stockGraphe("./albert4")
 
 # albert5 = genereBarabasiAlbert(2, 15000)
-# printf("Analyse de Albert5")
+# print("Analyse de Albert5")
 # albert5.analyseGraphe()
 # albert5.stockGraphe("./albert5")
 
@@ -282,25 +282,25 @@ albert3.stockGraphe("./albert3")
 """ Lecture et analyse des grands graphes de Stanford """
 
 # fbSites = filetoGraph("./FacebookSites.csv")
-# printf("Analyse de FacebookSites")
+# print("Analyse de FacebookSites")
 # fbSites.analyseGraphe()
 
 # gitHub = filetoGraph("./GitHub.csv")
-# printf("Analyse de GitHub")
+# print("Analyse de GitHub")
 # gitHub.analyseGraphe()
 
 # roadNet = filetoGraph("./RoadNetwork.txt")
-printf("Analyse de RoadNetwork")
+print("Analyse de RoadNetwork")
 # roadNet.analyseGraphe()
 
 twitch = filetoGraph("./twitchDE.csv")
-printf("Analyse de twitchDE")
+print("Analyse de twitchDE")
 twitch.analyseGraphe()
 
 wiki1 = filetoGraph("./Wikipedia1.csv")
-printf("Analyse de Wikipedia1")
+print("Analyse de Wikipedia1")
 wiki1.analyseGraphe()
 
 wiki2 = filetoGraph("./Wikipedia2.csv")
-printf("Analyse de Wikipedia2")
+print("Analyse de Wikipedia2")
 wiki2.analyseGraphe()
