@@ -19,7 +19,7 @@ Nous avons remarqué qu'au-delà de 5000 sommets pour les graphes Edgar Gilbert 
 En se basant sur cette limite, nous avons trouvé que la taille maximum des graphes de Edgar Gilbert est de 10000 sommets et de 20000 sommets pour les graphes de Barabasi-Albert. Avec ces tailles, il est impossible de calculer les paramètres.
 
 #### Réalisé par : 
-Julie GASPAR
-Max HOFFER
-Laureline PARTONNAUD
+Julie GASPAR -
+Max HOFFER -
+Laureline PARTONNAUD -
 Simon PEREIRA
