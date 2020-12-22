@@ -290,7 +290,7 @@ albert3.stockGraphe("./albert3")
 # gitHub.analyseGraphe()
 
 # roadNet = filetoGraph("./RoadNetwork.txt")
-print("Analyse de RoadNetwork")
+# print("Analyse de RoadNetwork")
 # roadNet.analyseGraphe()
 
 twitch = filetoGraph("./twitchDE.csv")
