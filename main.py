@@ -124,7 +124,7 @@ class Graphe(object):
         print ("nombre d\'aretes : " + str(self.nbAretes()))
         print ("degre maximal : " + str(self.degreMax()))
         print ("degre moyen : " + str(self.degreMoyen()))
-        self.distribDegre()
+        # self.distribDegre()
 
 
 def filetoGraph(path):                  #transforme un fichier de listes des arêtes en graphe
@@ -223,47 +223,68 @@ def graphetoMat(graphe):                #convertit le graphe en matrice
             M[s-1][v.id-1]=1
     return(M)
 
-# edgar1 = genereRado(10)
-# edgar1.analyseGraphe()
-# print("diamètre : " + str(diametreGraphe(edgar1)))
-# edgar1.stockGraphe("./edgar1")
+""" Generation et analyse des graphes Edgar Gilbert """
 
-# edgar2 = genereRado(100)
-# edgar2.analyseGraphe()
-# edgar2.stockGraphe("./edgar2")
+edgar1 = genereRado(10)
+edgar1.analyseGraphe()
+print("diamètre : " + str(diametreGraphe(edgar1)))
+edgar1.stockGraphe("./edgar1")
 
-# edgar3 = genereRado(1000)
-# edgar3.analyseGraphe()
-# edgar3.stockGraphe("./edgar3")
+edgar2 = genereRado(100)
+edgar2.analyseGraphe()
+edgar2.stockGraphe("./edgar2")
 
-# edgar4 = genereRado(2000)
-# edgar4.analyseGraphe()
-# edgar4.stockGraphe("./edgar4")
+edgar3 = genereRado(1000)
+edgar3.analyseGraphe()
+edgar3.stockGraphe("./edgar3")
 
-# edgar5 = genereRado(5000)
-# edgar5.analyseGraphe()
-# edgar5.stockGraphe("./edgar5")
+edgar4 = genereRado(2000)
+edgar4.analyseGraphe()
+edgar4.stockGraphe("./edgar4")
 
+edgar5 = genereRado(5000)
+edgar5.analyseGraphe()
+edgar5.stockGraphe("./edgar5")
+
+""" Generation et analyse des graphes Barabasi-Albert """
 
 albert1 = genereBarabasiAlbert(2, 10)
 albert1.analyseGraphe()
 albert1.stockGraphe("./albert1")
 
-# albert2 = genereBarabasiAlbert(2, 100)
-# albert2.analyseGraphe()
-# albert2.stockGraphe("./albert2")
+albert2 = genereBarabasiAlbert(2, 100)
+albert2.analyseGraphe()
+albert2.stockGraphe("./albert2")
 
-# albert3 = genereBarabasiAlbert(2, 1000)
-# albert3.analyseGraphe()
-# albert3.stockGraphe("./albert3")
+albert3 = genereBarabasiAlbert(2, 1000)
+albert3.analyseGraphe()
+albert3.stockGraphe("./albert3")
 
-# albert4 = genereBarabasiAlbert(2, 10000)
-# albert4.analyseGraphe()
-# albert4.stockGraphe("./albert4")
+albert4 = genereBarabasiAlbert(2, 10000)
+albert4.analyseGraphe()
+albert4.stockGraphe("./albert4")
 
-# albert5 = genereBarabasiAlbert(2, 15000)
-# albert5.analyseGraphe()
-# albert5.stockGraphe("./albert5")
+albert5 = genereBarabasiAlbert(2, 15000)
+albert5.analyseGraphe()
+albert5.stockGraphe("./albert5")
 
-leGraphe = filetoGraph("./albert1.txt")
-leGraphe.analyseGraphe()
+
+""" Lecture et analyse des grands graphes de Stanford """
+
+fbSites = filetoGraph("./FacebookSites.csv")
+fbSites.analyseGraphe()
+
+gitHub = filetoGraph("./GitHub.csv")
+gitHub.analyseGraphe()
+
+# roadNet = filetoGraph("./RoadNetwork.txt")
+# roadNet.analyseGraphe()
+
+twitch = filetoGraph("./twitchDE.csv")
+twitch.analyseGraphe()
+
+wiki1 = filetoGraph("./Wikipedia1.csv")
+wiki1.analyseGraphe()
+
+wiki2 = filetoGraph("./Wikipedia2.csv")
+wiki2.analyseGraphe()
