@@ -3,9 +3,11 @@
 
 Ce projet utilise différentes librairies qu'il nécessite l'importer : 
 
-```import random
+```
+import random
 import math
-import matplotlib.pyplot as plt ```
+import matplotlib.pyplot as plt
+```
 
 Tous les fichiers générés, lus et analysés, utilisés pour le rapport se situent dans un sous dossier du rendu. 
 
