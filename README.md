@@ -1,7 +1,7 @@
 # Projet - Outils pour la conception d'algorithmes
 ## Etudes de graphes du web
 
-Ce projet utilise différentes librairies qu'il nécessite l'importer : 
+Ce projet utilise différentes librairies qu'il nécessite d'importer : 
 
 ```
 import random
