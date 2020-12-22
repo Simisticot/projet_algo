@@ -72,13 +72,11 @@ class Graphe(object):
     def nbAretes(self):                 #calcul le nombre d'aretes presentes dans le graphe
         L=[]
         k=0
-        
         for s in self.sommets:
             L.append(s)
             for v in self.getSommet(s).voisins:
                 if v.id not in L:
                     k=k+1
-        
         return(k)
 
     def degreMax(self):                 #recupere le degre maximal du graphe
@@ -94,11 +92,10 @@ class Graphe(object):
         return total
 
     def degreMoyen(self):               #calcul le degré moyen du graphe
-        return self.degreTotal()/self.nbSommets()
+        return round(self.degreTotal()/self.nbSommets(), 3)
 
-    def distribDegre(self):
+    def distribDegre(self):             #affiche la distribution des degres sous forme graphique
         x = [] 
-          
         for lessommets in self.sommets:
             x.append(self.sommets[lessommets].getDegre())
 
@@ -107,23 +104,16 @@ class Graphe(object):
         plt.xlabel('x - Degre') 
         plt.ylabel('y - Frequence d\'apparition') 
         plt.title('Distribution des degrés') 
-        plt.show() 
+        plt.show(block = False) 
 
-    def listeAdj(self):                 #affiche uns à uns les voisins des sommets du graphe
-        lesvoisins = []
-        for i in self.sommets:
-            for j in self.sommets[i].adjacent():
-                if j not in '[ ,]' :
-                    lesvoisins.append([i, j])
-        for i in lesvoisins:
-            print (i)
-            
-    def stockGraphe(self, nomfichier): #stocke le graphe dans un fichier texte depuis la liste d'adjacence
-        with open("./"+nomfichier+".txt", "w") as monfichier:
+    def stockGraphe(self, path):        #stocke le graphe dans un fichier texte depuis la liste d'adjacence
+        with open(path+".txt", "w") as monfichier:
             for i in self.sommets:
-                for j in self.sommets[i].adjacent():
-                    if j not in '[ ,]' :
-                        monfichier.write(str(i) + "," + str(j) + "\n")
+                if (self.sommets[i].voisins == []):
+                    monfichier.write(str(i) + "," + "\n")
+                else:
+                    for j in self.sommets[i].voisins:
+                        monfichier.write(str(i) + "," + str(j.id) + "\n")
    
     def afficheGraphe(self):            #affiche le graphe avec sa liste d'adjacence
         for x in self.sommets:
@@ -137,7 +127,7 @@ class Graphe(object):
         self.distribDegre()
 
 
-def filetoGraph(path):            #transforme un fichier de listes des arêtes en graphe
+def filetoGraph(path):                  #transforme un fichier de listes des arêtes en graphe
     file = open(path,"r")
     lines = file.readlines()
     file.close()
@@ -205,7 +195,7 @@ def genereBarabasiAlbert(m, taille):    #genere un graph de Barabasi-Albert
                     i += 1
     return graphe
 
-def diametreGraphe(graphe):         #calcule le diametre du graphe
+def diametreGraphe(graphe):             #calcule le diametre du graphe
     D=floyd_warshall(graphetoMat(graphe))
     
     max=0
@@ -215,7 +205,7 @@ def diametreGraphe(graphe):         #calcule le diametre du graphe
                 max=j
     return(max)
 
-def floyd_warshall(mat):            #renvoie la matrice de la plus petite distance pour chaque couple de sommets
+def floyd_warshall(mat):                #renvoie la matrice de la plus petite distance pour chaque couple de sommets
     n = len(mat[0])
     distance = list(map(lambda i: list(map(lambda j: j, i)), mat))
     
@@ -225,7 +215,7 @@ def floyd_warshall(mat):            #renvoie la matrice de la plus petite distan
                 distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
     return(distance)
 
-def graphetoMat(graphe):            #convertit le graphe en matrice
+def graphetoMat(graphe):                #convertit le graphe en matrice
     M = [[math.inf for i in range(graphe.nbSommets())]for j in range(graphe.nbSommets())]
    
     for s in graphe.sommets:
@@ -235,45 +225,45 @@ def graphetoMat(graphe):            #convertit le graphe en matrice
 
 # edgar1 = genereRado(10)
 # edgar1.analyseGraphe()
-# print(diametreGraphe(edgar1))
-# edgar1.stockGraphe("edgar1")
+# print("diamètre : " + str(diametreGraphe(edgar1)))
+# edgar1.stockGraphe("./edgar1")
 
 # edgar2 = genereRado(100)
 # edgar2.analyseGraphe()
-# edgar2.stockGraphe("edgar2")
+# edgar2.stockGraphe("./edgar2")
 
 # edgar3 = genereRado(1000)
 # edgar3.analyseGraphe()
-# edgar3.stockGraphe("edgar3")
+# edgar3.stockGraphe("./edgar3")
 
 # edgar4 = genereRado(2000)
 # edgar4.analyseGraphe()
-# edgar4.stockGraphe("edgar4")
+# edgar4.stockGraphe("./edgar4")
 
 # edgar5 = genereRado(5000)
 # edgar5.analyseGraphe()
-# edgar5.stockGraphe("edgar5")
+# edgar5.stockGraphe("./edgar5")
 
 
-# albert1 = genereBarabasiAlbert(2, 10)
-# albert1.analyseGraphe()
-# albert1.stockGraphe("albert1")
+albert1 = genereBarabasiAlbert(2, 10)
+albert1.analyseGraphe()
+albert1.stockGraphe("./albert1")
 
 # albert2 = genereBarabasiAlbert(2, 100)
 # albert2.analyseGraphe()
-# albert2.stockGraphe("albert2")
+# albert2.stockGraphe("./albert2")
 
 # albert3 = genereBarabasiAlbert(2, 1000)
 # albert3.analyseGraphe()
-# albert3.stockGraphe("albert3")
+# albert3.stockGraphe("./albert3")
 
 # albert4 = genereBarabasiAlbert(2, 10000)
 # albert4.analyseGraphe()
-# albert4.stockGraphe("albert4")
+# albert4.stockGraphe("./albert4")
 
 # albert5 = genereBarabasiAlbert(2, 15000)
 # albert5.analyseGraphe()
-# albert5.stockGraphe("albert5")
+# albert5.stockGraphe("./albert5")
 
-leGraphe = filetoGraph("./Wikipedia2.csv")
+leGraphe = filetoGraph("./albert1.txt")
 leGraphe.analyseGraphe()
